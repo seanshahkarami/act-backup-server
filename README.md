@@ -53,7 +53,15 @@ Save this to `~/bin/com.act.act-backup-server.plist`.
 launchctl load com.act.act-backup-server.plist
 ```
 
-### 3. Unload if needed
+### 3. Connect in Windows XP
+
+You should be able to connect on `10.0.2.2` by default. For example, with the default credentials:
+
+```
+ftp://xp:xp@10.0.2.2:2121
+```
+
+### 4. Unload if needed
 
 ```sh
 launchctl unload com.act.act-backup-server.plist
