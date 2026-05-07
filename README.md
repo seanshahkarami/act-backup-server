@@ -50,11 +50,11 @@ Save this to `~/bin/com.act.act-backup-server.plist`.
 ```
 
 ```sh
-launchctl load com.sean.act-backup-server.plist
+launchctl load com.act.act-backup-server.plist
 ```
 
 ### 3. Unload if needed
 
 ```sh
-launchctl unload com.sean.act-backup-server.plist
+launchctl unload com.act.act-backup-server.plist
 ```
