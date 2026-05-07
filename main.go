@@ -8,6 +8,7 @@ import (
 	"log/slog"
 	"os"
 	"path/filepath"
+	"time"
 
 	ftpserver "github.com/fclairamb/ftpserverlib"
 	"github.com/spf13/afero"
@@ -78,12 +79,20 @@ func main() {
 		log.Fatal(err)
 	}
 
-	info, err := os.Stat(root)
-	if err != nil {
-		log.Fatal(err)
-	}
-	if !info.IsDir() {
-		log.Fatalf("root is not a directory: %s", root)
+	for {
+		info, err := os.Stat(root)
+		if err != nil {
+			if os.IsNotExist(err) {
+				fmt.Printf("Directory %s does not exist, retrying in 1 second...\n", root)
+				time.Sleep(1 * time.Second)
+				continue
+			}
+			log.Fatal(err)
+		}
+		if !info.IsDir() {
+			log.Fatalf("root is not a directory: %s", root)
+		}
+		break
 	}
 
 	fmt.Println("serving root", root)
