@@ -79,11 +79,12 @@ func main() {
 		log.Fatal(err)
 	}
 
+	log.Printf("waiting for directory %s to exist...", root)
+
 	for {
 		info, err := os.Stat(root)
 		if err != nil {
 			if os.IsNotExist(err) {
-				fmt.Printf("Directory %s does not exist, retrying in 1 second...\n", root)
 				time.Sleep(1 * time.Second)
 				continue
 			}
@@ -95,11 +96,10 @@ func main() {
 		break
 	}
 
-	fmt.Println("serving root", root)
-	fmt.Println("listening on", *listenAddr)
-	fmt.Println()
-	fmt.Printf("connect to server at: ftp://%s:%s@%s\n", *username, *password, publicHost+":2121")
-	fmt.Println()
+	log.Printf("directory is ready!")
+
+	log.Println("serving root", root)
+	log.Println("listening on", *listenAddr)
 
 	driver := &Driver{
 		root:       root,
